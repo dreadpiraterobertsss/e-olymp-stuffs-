@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    double x1, y1, r1, x2, y2, r2;
+    cin >> x1 >> y1 >> r1 >> x2 >> y2 >> r2;
+
+    int ans = 2;
+    double dist = (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1);
+    double r1_p_r2 = r1 + r2;
+    double r1_m_r2 = r1 - r2;
+
+    if (x1 == x2 && y1 == y2 && r1 == r2) {
+        ans = -1; 
+    } else if (dist == r1_p_r2 * r1_p_r2 || dist == r1_m_r2 * r1_m_r2) {
+        ans = 1; 
+    } else if (dist < r1_p_r2 * r1_p_r2 && dist > r1_m_r2 * r1_m_r2) {
+        ans = 2; 
+    } else {
+        ans = 0; 
+    }
+
+    cout << ans;
+
+    return 0;
+}
