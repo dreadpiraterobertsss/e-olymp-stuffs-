@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    int n;
+    cin >> n;
+    vector<int> arr(n);
+    for(int i = 0; i < n; i++){
+        cin >> arr[i];
+    }
+
+    int sp = 0; 
+    int ep = n - 1;
+    long long  hus = 0;
+    long long yar = 0;
+    int time = 0;
+    while(sp < ep){
+        if(time % 2 == 0){
+            if(arr[sp] >= arr[ep]){
+                hus += arr[sp];
+                sp++;
+            }
+            else{
+                hus += arr[ep];
+                ep--;
+            }
+        }
+        else{
+            if(arr[sp] >= arr[ep]){
+                yar += arr[sp];
+                sp++;
+            }
+            else{
+                yar += arr[ep];
+                ep--;
+            }
+        }
+        time++;
+    }
+    
+   
+    if(sp == ep) {
+        if(time % 2 == 0){
+            hus += arr[sp];
+        } else {
+            yar += arr[sp];
+        }
+    }
+    
+    cout << hus << " " << yar;
+    
+    return 0;
+}
