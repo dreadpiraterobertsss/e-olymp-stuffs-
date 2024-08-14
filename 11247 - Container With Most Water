@@ -1,0 +1,40 @@
+include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    long long n;
+    cin >> n;
+    vector<int> arr(n);
+    for(int i = 0; i < n; i++){
+        cin >> arr[i];
+    }
+
+    long long  sp = 0;
+    long long  ep = n - 1;
+    long long wid = n - 1;
+    long long  mx = 0;
+    while(sp < ep){
+        if (arr[ep] < arr[sp]){
+            if(arr[ep] * wid >= mx){
+                mx = arr[ep] * wid;
+            }
+            ep --;
+           
+        }
+        else{
+            if(arr[sp] * wid >= mx){
+                mx = arr[sp] * wid;
+            }
+            sp ++;
+            
+
+        }
+        wid --;
+    }
+    cout << mx;
+    
+}
