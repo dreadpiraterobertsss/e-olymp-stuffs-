@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    string n;
+    cin >> n;
+    
+    int sp = 0;
+    int ep = n.size() - 1;
+    int sz = n.size();
+
+    while(sp < ep) {
+        if(n[sp] == '0' && n[ep] == '1' || n[sp] == '1' && n[ep] == '0') {
+            sz -= 2;
+            sp++;
+            ep--;
+        } else {
+            cout << sz;
+            return 0;
+        }
+    }
+
+    
+    cout << sz;
+    
+    return 0;
+}
+
