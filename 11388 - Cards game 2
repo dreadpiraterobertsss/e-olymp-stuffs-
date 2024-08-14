@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    int n;
+    cin >> n;
+    vector<int> arr(n);
+    for(int i = 0; i < n; i++){
+        cin >> arr[i];
+    }
+
+    int sp = 0;
+    int ep = n - 1;
+    if(n % 2 == 0){
+        while(sp <= ep){
+            cout << arr[sp] << " " << arr[ep] << " ";
+            sp ++;
+            ep --;
+        }
+    }
+    else{
+        while(sp <= ep){
+            if(sp != (n/2)){
+                cout << arr[sp] << " " << arr[ep] << " ";
+                sp ++;
+                ep --;
+            }
+            else{
+                cout << arr[sp] ;
+                sp ++;
+                ep --;
+            }
+            
+            
+            
+            
+        }
+    }
+    
+}
