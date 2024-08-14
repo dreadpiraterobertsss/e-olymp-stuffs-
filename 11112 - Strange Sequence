@@ -1,0 +1,8 @@
+n,k = map(int, input().split())
+
+
+for i in range(k):
+    l = int("".join(sorted(str(n))))
+    m = int("".join(sorted(str(n)))[::-1])
+    n = m - l
+print(n)
