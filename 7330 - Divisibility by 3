@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    unsigned int n;
+    cin >> n;
+    long long ans = 0;
+    long long sm = 0;
+    for(int i = 1;i <= n; i++){
+        sm += i;
+        if(sm % 3 == 0 ){
+            ans ++;
+        }
+    }
+    cout << ans;
+    return 0;
+}
