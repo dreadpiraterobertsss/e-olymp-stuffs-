@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    int a,b,c;
+    cin >> a >> b >> c;
+
+    ll disk = b * b - 4 * a * c;
+    if(disk < 0){
+        cout <<  "No roots";
+    }
+    else if (disk == 0){
+        ll ans = (-b ) / (2 * a);
+        cout << "One root: " <<  ans;
+    }
+    else{
+        
+        ll sdisk = sqrt(disk);
+        ll ans = (-b + sdisk) / (2 * a);
+        ll ans1 = (-b - sdisk) / (2 * a);
+        ll mn = ans < ans1 ? ans : ans1;
+
+        cout << "Two roots: " << mn << " " << ans1 + ans - mn ;
+    }
+    return 0;
+}
