@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+using namespace std;
+int n;
+vector<vector<int>> arr;
+vector<int> dist;
+queue<int> q;
+
+void bfs(int k){
+    dist[k] = 0;
+    q.push(k);
+
+    while(!q.empty()){
+        int v = q.front();
+        q.pop();
+
+        for(int i = 0; i < n; i++){
+            if(arr[v][i] == 1 && dist[i] == -1){
+                q.push(i);
+                dist[i] = dist[v] + 1;
+            }
+        }
+    }
+
+
+}
+
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    int s,f;
+    cin >> n >> f >> s;
+    arr.resize(n, vector<int> (n));
+    dist.resize(n,-1);
+    for(int i = 0; i < n; i++){
+        for(int j = 0;j < n; j++){
+            cin >> arr[i][j];
+        }
+    }
+
+    bfs(s-1);
+
+    if (dist[f-1] < 0){
+        dist[f-1] = 0;
+    }
+
+    cout << dist[f-1] ;
+    return 0;
+}
