@@ -1,0 +1,75 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> dist;
+vector<int> parent;
+queue<int> q;
+vector<vector<int>> arr;
+int n;
+
+void bfs(int start){
+    dist[start] = 0;
+    q.push(start);
+
+    while(!q.empty()){
+        int k = q.front();
+        q.pop();
+
+        for(auto it : arr[k]){
+            if (dist[it] == -1){
+                q.push(it);
+                dist[it] = dist[k] + 1;
+                parent[it] = k;
+            }
+        }
+    }
+}
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    int m;
+    cin >> n >> m;
+    arr.resize(n);
+    dist.resize(n, -1);
+    parent.resize(n, -1);
+
+    int s, f;
+    cin >> s >> f;
+
+    for(int i = 0; i < m; i++){
+        int sp, ep;
+        cin >> sp >> ep;
+        arr[sp - 1].push_back(ep - 1);
+        arr[ep - 1].push_back(sp - 1);
+    }
+
+    bfs(s - 1);
+
+    if(dist[f - 1] == -1) {
+        
+        cout << -1 << endl;
+    } else {
+        
+        vector<int> path;
+        for(int v = f - 1; v != -1; v = parent[v]){
+            path.push_back(v + 1); 
+        }
+            
+        reverse(path.begin(), path.end());
+
+       
+        cout << path.size() - 1 << endl;
+
+        
+        for(int v : path){
+            cout << v << " ";
+        }
+            
+        
+    }
+
+    return 0;
+}
