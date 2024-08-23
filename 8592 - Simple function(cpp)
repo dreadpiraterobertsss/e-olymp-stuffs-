@@ -1,0 +1,11 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    double n;
+    cin >> n;
+
+    double m = n + sin(n);
+    cout << fixed << setprecision(4) << m ;
+    return 0;
+}
