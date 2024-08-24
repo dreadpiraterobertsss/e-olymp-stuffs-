@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+using namespace std;
+vector<vector<pair<int,int>>> arr;
+vector<int> dist;
+const int INF = INT_MAX;
+
+void djk(vector<vector<pair<int,int>>> &arr){
+    priority_queue<pair<int,int> , vector<pair<int,int>> , greater<pair<int,int>>> pq;
+    pq.push({0,0});
+
+    while(!pq.empty()){
+        int dis = pq.top().first;
+        int node = pq.top().second;
+        pq.pop();
+
+        for(auto it : arr[node]){
+            int adjnode = it.first;
+            int weight = it.second;
+
+            if(dis + weight < dist[adjnode]){
+                dist[adjnode] = dis + weight;
+                pq.push({dist[adjnode],adjnode});
+            }
+        }
+    }
+}
+
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    int i,s,l,u;
+    cin >> i >> s >> l >> u;
+    arr.resize(i);
+    dist.resize(i,INF);
+    dist[0] = 0;
+    for(int i = 0; i < s; i++){
+        int sp,ep,w;
+        cin >> sp >> ep >> w;
+        arr[sp].emplace_back(ep,w);
+        arr[ep].emplace_back(sp,w);
+    }
+
+    djk(arr);
+    set<pair<int, int>> ans;
+    for(int j = 0; j < i ; j++){
+        if(dist[j] <= (u-1)/2){
+            for(pair<int, int> it : arr[j]){
+                int v = it.first;
+                ans.insert({ min(v, j), max(v, j) });
+
+            }
+        }
+    }
+
+    
+    cout << ans.size();
+    return 0;
+} 
