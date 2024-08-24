@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+using namespace std;
+vector<vector<int>> arr;
+vector<int> dist;
+const int INF = INT_MAX;
+int n;
+
+void djk(vector<vector<int>> &arr){
+    priority_queue<pair<int,int>, vector<pair<int,int>> , greater<pair<int,int>>> pq;
+    pq.push({0,0});
+
+    while(!pq.empty()){
+        int dis = pq.top().first;
+        int node = pq.top().second;
+        pq.pop();
+
+        for(int i = 0; i < n; i++){
+            if(arr[node][i] != 0){
+                int adjnode = i;
+                int weight = arr[node][i];
+
+                if(dis + weight < dist[adjnode]){
+                    dist[adjnode] = dis + weight;
+                    pq.push({dist[adjnode],adjnode});
+                }
+            }
+        }
+    }
+}
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    
+    cin >> n;
+    dist.resize(n,INF);
+    vector<int> cost(n);
+    dist[0] = 0;
+    for(int i = 0; i < n; i++){
+        cin >> cost[i];
+    }
+
+    int m;
+    cin >> m;
+    vector<int> new_(2*m);
+    for(int i = 0; i < 2 * m; i++){
+        cin >> new_[i];
+    }
+
+    arr.resize(n,vector<int> (n));
+    for(int i = 0; i < 2 * m; i+=2){
+        arr[new_[i]-1][new_[i+1]-1] = cost[new_[i]-1];
+    }
+    reverse(new_.begin(),new_.end());
+    for(int i = 0; i < 2 * m; i+=2){
+        arr[new_[i]-1][new_[i+1]-1] = cost[new_[i]-1];
+    }
+
+
+    djk(arr);
+    if(dist[n-1] == INF){
+        cout << -1;
+
+    }
+    else{
+        cout << dist[n-1];
+    }
+
+
+    return 0;
+
+}
