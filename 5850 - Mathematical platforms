@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+vector<ll> dist;
+const ll INF = LLONG_MAX;
+
+void djk(int n, vector<int>& height) {
+    priority_queue<pair<ll,int>, vector<pair<ll,int>>, greater<pair<ll,int>>> pq;
+    pq.push({0, 0});
+
+    while (!pq.empty()) {
+        ll dis = pq.top().first;
+        int node = pq.top().second;
+        pq.pop();
+
+        if (dis > dist[node]) continue;
+
+        for (int adjnode = 0; adjnode < n; adjnode++) {
+            if (adjnode == node) continue;
+            ll weight = (node - adjnode) * (node - adjnode) * (ll)(height[node] - height[adjnode]) * (height[node] - height[adjnode]);
+
+            if (dis + weight < dist[adjnode]) {
+                dist[adjnode] = dis + weight;
+                pq.push({dist[adjnode], adjnode});
+            }
+        }
+    }
+}
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    int n;
+    cin >> n;
+    vector<int> height(n);
+    for (int i = 0; i < n; i++) {
+        cin >> height[i];
+    }
+
+    dist.resize(n, INF);
+    dist[0] = 0;
+
+    djk(n, height);
+
+    cout << dist[n - 1];
+    return 0;
+}
