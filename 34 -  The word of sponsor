@@ -1,0 +1,73 @@
+#include <bits/stdc++.h>
+using namespace std;
+vector<vector<pair<int,int>>> arr;
+vector<int> dist;
+const int INF = INT_MAX;
+int n,m,k;
+int sponsor;
+
+void djk(vector<vector<pair<int,int>>> &arr){
+    priority_queue<pair<int,int>, vector<pair<int,int>> , greater<pair<int,int>>> pq;
+    pq.push({0,sponsor-1});
+
+    while(!pq.empty()){
+        int dis = pq.top().first;
+        int node = pq.top().second;
+
+        pq.pop();
+
+        for(auto &it : arr[node]){
+            int adjnode = it.first;
+            int weight = it.second;
+
+            if (dis + weight < dist[adjnode]){
+                dist[adjnode] = dis + weight;
+                pq.push({dist[adjnode], adjnode});
+            }
+        }
+    }
+}
+
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    
+    cin >> n >> m >> k;
+
+    vector<int> win(m);
+    
+    for(int i = 0; i < m; i++){
+        cin >> win[i];
+    }
+
+    arr.resize(n);
+    dist.resize(n,INF);
+    for(int i = 0; i < k; i++){
+        int sp,ep,w;
+        cin >> sp >> ep >> w;
+        arr[sp-1].emplace_back(ep-1,w);
+        arr[ep-1].emplace_back(sp-1,w);
+    }
+    
+    cin >> sponsor;
+    dist[sponsor-1] = 0;
+
+    djk(arr);
+    int max_time = 0;
+
+    for (auto it : win) {
+        if (dist[it - 1] == INF) {
+            cout << "It is not fault of sponsor...\n";
+            return 0;
+        }
+        max_time = max(max_time, dist[it - 1]);
+    }
+
+    cout << "The good sponsor!\n";
+    cout << max_time << "\n";
+
+    return 0;
+}
