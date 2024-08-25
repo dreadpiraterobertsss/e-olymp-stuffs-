@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    int n;
+    cin >> n;
+
+    if (n >=1 && n <= 3){
+        cout << "Initial" ;
+    }
+    else if (n >=4 && n <= 6){
+        cout <<  "Average" ;
+    }
+    else if (n >=7 && n <= 9){
+        cout <<  "Sufficient" ;
+    }
+    else{
+        cout << "High";
+    }
+    return 0;
+}
