@@ -1,0 +1,24 @@
+a = input().split()
+
+ls = []
+for i in a:
+    if i.isdigit():
+        ls.append(i)
+    else:
+        b = ls.pop()  
+        a = ls.pop()  
+        
+        
+        if i == "*":
+            ans = int(a) * int(b)
+        elif i == "+":
+            ans = int(a) + int(b)
+        elif i == "-":
+            ans = int(a) - int(b)
+        elif i == "/":
+            ans = int(a) // int(b)  
+        
+        
+        ls.append(ans)
+
+print(ls[0])
