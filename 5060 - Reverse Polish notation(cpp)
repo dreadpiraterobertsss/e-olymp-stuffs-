@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    string n;
+    getline(cin,n);
+    stack<int> stk;
+
+    stringstream arr(n);
+    string nw;
+
+    while(arr >> nw){
+        if(nw == "+" || nw == "-" || nw == "*" || nw == "/"){
+            int a = stk.top();
+            stk.pop();
+            int b = stk.top();
+            stk.pop();
+
+            if (nw == "+"){
+                stk.push(a + b);
+            }
+            else if (nw == "-"){
+                stk.push(b - a);
+            }
+            else if (nw == "*"){
+                stk.push(a * b);
+            }
+            else if (nw == "/"){
+                stk.push(b / a);
+            }
+        }
+        else{
+            stk.push(stoi(nw));
+        }
+    }
+
+    cout << stk.top() ;
+    
+    return 0;
+}
