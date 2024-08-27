@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    string k;
+    stack<int> arr;
+    while(cin >> k){
+        if(k == "push"){
+            int v;
+            cin >> v;
+            arr.push(v);
+        }
+        else if(k == "top"){
+            if(!arr.empty()){
+                cout << arr.top() << "\n";
+
+            }
+            
+        }
+        else if(k == "pop"){
+            if(!arr.empty()){
+                arr.pop();
+
+            }
+            
+        }
+
+    }
+    return 0;
+}
