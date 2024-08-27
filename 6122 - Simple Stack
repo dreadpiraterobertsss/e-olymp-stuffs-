@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    stack<long long> s;
+    string k;
+    while(cin >> k){
+        if (k == "push"){
+            long long l;
+            cin >> l;
+            s.push(l);
+            cout << "ok" << "\n";
+        }
+        else if(k == "back"){
+            cout << s.top() << "\n";
+        }
+        else if(k == "size"){
+            cout << s.size() << "\n";
+        }
+        else if(k == "pop"){
+            cout << s.top() << "\n";
+            s.pop();
+        }
+        else if(k == "clear"){
+            
+            while(!s.empty()){
+                s.pop();
+            } 
+            cout << "ok" << "\n";
+        }
+        else if(k == "exit"){
+            cout << "bye" << "\n";
+            break;
+            
+        }
+    }
+
+    return 0;
+}
