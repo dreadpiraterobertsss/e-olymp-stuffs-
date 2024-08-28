@@ -1,0 +1,15 @@
+n = int(input())
+dic = {}
+for i in range(n):
+    val = input()
+    if val in dic:
+        dic[val] += 1
+    else:
+        dic[val] = 1
+flag = 0
+for i in dic.items():
+    if(i[1] > n - i[1]):
+        print(i[0])
+        flag = 1
+if(flag == 0):
+    print("NONE")
