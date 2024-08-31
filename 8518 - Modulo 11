@@ -1,0 +1,45 @@
+from itertools import combinations
+t = int(input())
+for _ in range(t):
+    k,m = map(int, input().split())
+    d = list(range(10))
+    fact = 120
+    if k == 2:
+        d += list(range(10))
+        fact = 3628800
+    n = len(d)
+    ans = 0 
+    n_h = n // 2 
+    for _ in combinations(range(n),n_h):
+        sum_ = 0
+        
+        for j in _:
+            sum_ += d[j]
+        for j in range(n):
+            if j not in _:
+                sum_ -= d[j]
+        
+            
+        if (sum_ % 11) == m:
+            cnt1 = fact
+            non_0 = 0
+            _0_ = 0
+            
+            for d_ in range(n):
+                if d_ not in _:
+                    if d[d_] != 0:
+                        cnt1 *= (non_0 + 1)
+                        non_0 += 1
+                        
+                    else:
+                        _0_ += 1
+            
+            if _0_  == 1:
+                cnt1 *= (n_h - 1)
+            elif _0_ == 2:
+                cnt1 *= (n_h - 1) * (n_h - 2)
+            if k == 2:
+                cnt1 //= 2 ** 10
+            ans += cnt1
+            
+    print(ans)
